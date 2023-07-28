@@ -1,4 +1,4 @@
-#+Title EditorJs wrappers
+* EditorJs wrappers
 Some wrappers written for use in projects.
 
 This is meant for use in my personal projects and is available to use
@@ -28,8 +28,8 @@ const editorjsParseStringToObject = require('<path/to/editorjs-parse-string-to-o
 app.use('<path>', [editorjsParseStringToObject, ... ] );
 #+end_src
 *The major assumption is that the data is passed from frontend*
-*as a form containing data inside a field with name "editorjs"*
-*i.e. available as req.body.editorjs*
+*as a form containing data inside a field with name "editorjs"
+i.e. available as req.body.editorjs*
 * EditorJs Parse To HTML
 Function to convert editorjs JSON data to HTML with custom parsing
 ** Usage
