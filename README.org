@@ -1,0 +1,81 @@
+#+Title EditorJs wrappers
+Some wrappers written for use in projects.
+
+This is meant for use in my personal projects and is available to use
+as is (Following the terms of orignal licence). No support provided.
+* EditorJs Image Handler
+Middleware which sets up paths to handle image upload from editorjs
+** Usage
+#+begin_src javascript
+const editorjsImageHandler= require('<path/to/editorjs-image-handler>')('<upload/destination>');
+
+app.use('<path>',editorjsImageHandler);
+#+end_src
+
+- The module path is relative to  importing module directory.
+- The upload destination is relative to server root (Process root directory)
+- The frontend HTML form should be served on same route as the module is used on
+  #+begin_export ascii
+  path
+  ├──── editor.html
+  └──── editorjsimagehandler
+  #+end_export
+* EditorJs Parse String To Object
+Middleware which converts editorjs data received as JSON string to Javascript Object
+** Usage
+#+begin_src javascript
+const editorjsParseStringToObject = require('<path/to/editorjs-parse-string-to-object');
+app.use('<path>', [editorjsParseStringToObject, ... ] );
+#+end_src
+*The major assumption is that the data is passed from frontend*
+*as a form containing data inside a field with name "editorjs"*
+*i.e. available as req.body.editorjs*
+* EditorJs Parse To HTML
+Function to convert editorjs JSON data to HTML with custom parsing
+** Usage
+#+begin_src javascript
+const editorjsParseToHtml = require('<path/to/editorjs-parse-to-html');
+const html= editorjsParseToHtml(editorjsJsonData);
+#+end_src
+Note: This is just a function, not middleware. It makes no assumptions of source of JSON.
+
+Additional custom parsing can be added by editing the module
+* EditorJs Wrapper
+Frontend ES module to simplify usage of editorjs as one unit
+** Usage
+#+begin_src html
+<form action="<handler route>" method="POST" id="<form id>"  >
+  <div id="<editor div id>"></div>
+  <button type="submit" >Submit</button>
+</form>
+#+end_src
+
+#+begin_src javascript
+import editorjs from 'path/to/editorjs-wrapper.js';
+
+let oldData;
+//same script will handle whether or not old data is provided
+if(document.getElementById('<id of element with json data>'))
+    oldData= JSON.parse(document.getElementById('<id of element with json data>').text);
+else
+    oldData=undefined;
+
+const editor= editorjs('<form id>','<editor div id>',oldData);
+#+end_src
+
+The module needs following to work.
+- Form with appropriate id which has to be passed as first argument
+- An empty div whose id has to be passed as second argument
+  
+Optionally old data can be provided. Following is the recommended way of doing so.
+#+begin_src html
+<script id="<id of element with json data>" type="application/json">
+  {
+  //JSON payload
+  //...  
+  }
+</script>
+#+end_src
+This can be automatically loaded whenever script element is available
+using above example script
+
