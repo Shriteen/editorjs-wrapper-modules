@@ -11,7 +11,7 @@ import InlineCode from 'https://cdn.jsdelivr.net/npm/@editorjs/inline-code@1.4.0
 import Underline from 'https://cdn.jsdelivr.net/npm/@editorjs/underline@1.1.0/+esm';
 import Image from 'https://cdn.jsdelivr.net/npm/@editorjs/image@2.8.1/+esm';
 
-export function editorJsWrapped(formId,editorDiv,oldData)
+export default function editorJsWrapped(formId,editorDiv,oldData)
 {
     const editor = new EditorJS({
 	holder: editorDiv,
