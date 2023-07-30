@@ -12,9 +12,10 @@ const editorjsImageHandler= require('<path/to/editorjs-image-handler>')('<upload
 app.use('<path>',editorjsImageHandler);
 #+end_src
 
-- The module path is relative to  importing module directory.
+- The module path is relative to importing module directory.
 - The upload destination is relative to server root (Process root directory)
 - The frontend HTML form should be served on same route as the module is used on
+- Note that it is a router so it has to be used on <path>, not actual endpoint
   #+begin_export ascii
   path
   ├──── editor.html
@@ -79,3 +80,5 @@ Optionally old data can be provided. Following is the recommended way of doing s
 This can be automatically loaded whenever script element is available
 using above example script
 
+It is assumed that server is handling image uploads at route <route of
+html>/editorJsImageHandler . (See EditorJs Image Handler)
